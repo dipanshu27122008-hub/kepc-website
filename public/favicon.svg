@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <rect width="100" height="100" rx="16" fill="#0B1B30"/>
+  <rect x="10" y="10" width="80" height="80" rx="10" stroke="#C83B43" stroke-width="3" fill="#142B49"/>
+  <text x="50" y="58" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">KEPC</text>
+  <path d="M22 68 L78 68" stroke="#C83B43" stroke-width="3" stroke-linecap="round"/>
+</svg>
