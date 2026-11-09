@@ -35,6 +35,7 @@ if (fs.existsSync(distHtmlPath)) {
   // 2. SEO & Metadata Verification
   assert(htmlContent.includes('<title>Krishna ESIC PF Consultancy'), 'Title tag contains brand & full name');
   assert(htmlContent.includes('meta name="description"'), 'Meta description present');
+  assert(htmlContent.includes('name="google-site-verification" content="7DkDhvcj1SA3j-yWLyLd-DcOA13xDwc6yjPdJAqh28U"'), 'Google Search Console verification tag present');
   assert(htmlContent.includes('Neemrana'), 'Location Neemrana present in metadata');
   assert(htmlContent.includes('"@type": "ProfessionalService"'), 'JSON-LD ProfessionalService schema present');
   assert(htmlContent.includes('9001900715'), 'Verified phone number present in schema');
