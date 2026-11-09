@@ -36,6 +36,10 @@ if (fs.existsSync(distHtmlPath)) {
   assert(htmlContent.includes('<title>Krishna ESIC PF Consultancy'), 'Title tag contains brand & full name');
   assert(htmlContent.includes('meta name="description"'), 'Meta description present');
   assert(htmlContent.includes('name="google-site-verification" content="7DkDhvcj1SA3j-yWLyLd-DcOA13xDwc6yjPdJAqh28U"'), 'Google Search Console verification tag present');
+  assert(htmlContent.includes('<link rel="canonical" href="https://kepc-website.pages.dev/" />'), 'Canonical URL points to kepc-website.pages.dev');
+  assert(htmlContent.includes('<meta property="og:url" content="https://kepc-website.pages.dev/" />'), 'Open Graph URL points to kepc-website.pages.dev');
+  assert(htmlContent.includes('"url": "https://kepc-website.pages.dev/"'), 'JSON-LD url points to kepc-website.pages.dev');
+  assert(!htmlContent.includes('kepc-consultancy.in'), 'No unverified kepc-consultancy.in domain in index.html');
   assert(htmlContent.includes('Neemrana'), 'Location Neemrana present in metadata');
   assert(htmlContent.includes('"@type": "ProfessionalService"'), 'JSON-LD ProfessionalService schema present');
   assert(htmlContent.includes('9001900715'), 'Verified phone number present in schema');
@@ -51,7 +55,16 @@ if (fs.existsSync(distHtmlPath)) {
 // 4. Verify Static Assets (robots, sitemap, favicon, logo)
 const publicDir = path.join(projectRoot, 'public');
 assert(fs.existsSync(path.join(publicDir, 'robots.txt')), 'public/robots.txt exists');
+const robotsContent = fs.readFileSync(path.join(publicDir, 'robots.txt'), 'utf-8');
+assert(robotsContent.includes('Sitemap: https://kepc-website.pages.dev/sitemap.xml'), 'robots.txt points to correct live sitemap');
+assert(!robotsContent.includes('kepc-consultancy.in'), 'robots.txt omits kepc-consultancy.in');
+
 assert(fs.existsSync(path.join(publicDir, 'sitemap.xml')), 'public/sitemap.xml exists');
+const sitemapContent = fs.readFileSync(path.join(publicDir, 'sitemap.xml'), 'utf-8');
+assert(sitemapContent.includes('<loc>https://kepc-website.pages.dev/</loc>'), 'sitemap.xml contains live homepage URL');
+assert(!sitemapContent.includes('#'), 'sitemap.xml contains zero hash URLs');
+assert(!sitemapContent.includes('kepc-consultancy.in'), 'sitemap.xml omits kepc-consultancy.in');
+
 assert(fs.existsSync(path.join(publicDir, 'favicon.svg')), 'public/favicon.svg exists');
 assert(fs.existsSync(path.join(publicDir, 'images/business-card.jpg')), 'public/images/business-card.jpg exists');
 
